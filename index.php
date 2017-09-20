@@ -7,7 +7,7 @@
   // include('./footer.html');
   // include 在当前PHP页面内部嵌入一个子页面
 
-  // 必须能够通过URL区分出用户想访问哪个页面
+  // 必须能够通过URL区分出用户想访问哪个页面（因为后台与前端交互只有通过URL得到信息）
 
   // 默认目录名称
   $dir = 'main';
@@ -19,13 +19,17 @@
     // PATH_INFO属性存在
     // 获取请求路径
     $path = $_SERVER['PATH_INFO']; // /main/index
+    // echo $path;
+
     // 去掉第一个斜杠
     $str = substr($path, 1); // main/index
+
     // 字符串分割，和js中split方法很像
     $ret = explode('/', $str);
+
     if(count($ret) == 2){
       // 路由有两层
-      $dir = $ret[0];// 覆盖目录
+      $dir = $ret[0]; // 覆盖目录
       $filename = $ret[1]; // 覆盖文件名称
     }else{
       // 其他情况全部跳转到登录页面
